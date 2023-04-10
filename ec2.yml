@@ -8,8 +8,8 @@
     access_key: AKIAYFXK4YTYCWRUYMNE
     secret_key: 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
   tasks:
-    - name: start specific number of multiple instances
-      amazon.aws.ec2_instance:
+    - name: create vm
+      ec2_instance:
         aws_secret_key: "{{secret_key}}"
         aws_access_key: "{{access_key}}"
         instance_type: t2.micro
