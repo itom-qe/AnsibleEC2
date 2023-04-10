@@ -30,6 +30,6 @@
     - debug:
         var: host_ip
     - name: add hosts
-      ansible.builtin.add_host:
+      add_host:
         groups: Apache
         name: "{{host_ip}}"
