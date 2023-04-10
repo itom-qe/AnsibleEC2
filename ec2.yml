@@ -28,7 +28,7 @@
       register: vm
     - set_fact: host_ip={{ vm["instances"][0]["private_ip_address"] }}
     - debug:
-        var: host_ip
+        var: vm
     - name: add hosts
       add_host:
         groups: Apache
