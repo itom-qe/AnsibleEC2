@@ -1,0 +1,36 @@
+---
+- name: Create Ec2 instances
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  vars:
+    region: us-east-1
+    access_key: AKIAYFXK4YTYCWRUYMNE
+    secret_key: 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
+  tasks:
+    - name: start specific number of multiple instances
+      amazon.aws.ec2_instance:
+        aws_secret_key: "{{secret_key}}"
+        aws_access_key: "{{access_key}}"
+        instance_type: t2.micro
+        image_id: ami-0121ef35996ede438
+        count: 1
+        state: present
+        region: us-west-1
+        key_name: ansible-key
+        vpc_subnet_id: subnet-6d439635
+        network:
+          assign_public_ip: yes
+        wait: yes
+        wait_timeout: 500
+        tags:
+          name: appservers
+          os: ubuntu
+      register: vm
+    - set_fact: host_ip={{ vm["instances"][0]["private_ip_address"] }}
+    - debug:
+        var: host_ip
+    - name: add hosts
+      ansible.builtin.add_host:
+        groups: Apache
+        name: "{{host_ip}}"
