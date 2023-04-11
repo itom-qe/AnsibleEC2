@@ -5,8 +5,8 @@
   gather_facts: yes
   vars:
     region: us-east-1
-    access_key: AKIAYFXK4YTYCWRUYMNE
-    secret_key: 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
+    access_key: <>
+    secret_key: <>
   tasks:
     - name: create vm
       ec2_instance:
